@@ -1,46 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>RVC - responding to voice command - speech API experiment</title>
 
-	<script src="kinetic-v4.0.5.min.js"></script>
+	<link rel="stylesheet" href="style.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-	<style>
-
-		#canvas {
-			position: absolute;
-			top: 30;
-			left: 30;
-      		box-shadow: 0 0 5px #ccc;
-      		margin: 0 auto;
-		}
-
-		#box {
-			width: 20px;
-			height: 20px;
-			position: absolute;
-			top: 0;
-			left: 0;
-			background: #0099ff;
-		}
-		#commands {
-			top: 30px;
-			bottom: 30px;
-			left: 30px;
-			right: 30px;
-			position: absolute;
-			border: 1px solid #f3f3f3;
-			padding: 20px;
-			font-family: Verdana;
-			color: #333;
-		}
-		#commands span {
-			border-right: 1px solid #f3f3f3;
-			padding: 0 5px;
-		}
-
-	</style>
 
 </head>
 <body>
@@ -50,57 +15,21 @@
 <div id="box"></div>
 <div id="commands"></div>
 
-<script>
+<div id="directions">
+	<div id="up">up</div>
+	<div id="left">left</div>
+	<div id="right">right</div>
+	<div id="down">down</div>
+</div>
 
-	var recognition = new webkitSpeechRecognition();
-	recognition.continuous = true;
-	recognition.interimResults = true;
-
-	recognition.onresult = function(event) {
-		final_transcript = '';
-		var interim_transcript = '';
-
-		for (var i = event.resultIndex; i < event.results.length; ++i) {
-		  if (event.results[i].isFinal) {
-		    final_transcript += event.results[i][0].transcript;
-		  } else {
-		    interim_transcript += event.results[i][0].transcript;
-		  }
-		}
-
-		move(final_transcript);
-
-	};
-	
-	recognition.start();
+<div id="levenshtein">
+	threshold level<br />
+	<input id="level" type="range" min="0" max="5" step= "1" value="0" />
+</div>
 
 
-	var width = $(document).width(),
-		height = $(document).height();
-
-	function move(direction) {
-		
-		direction = direction.replace(" ","");
-		if (direction === "") {
-			return;
-		}
-
-		$('<span />').html(direction).appendTo('#commands');
-		
-		switch (direction) {
-			case 'left': $('#box').animate({left: 0}, 5000);
-					break;
-			case 'right': $('#box').animate({left: width - 20}, 5000);
-					break;
-			case 'up': $('#box').animate({top: 0}, 5000);
-					break;
-			case 'down': $('#box').animate({top: height - 20}, 5000);
-					break;
-		}
-	}
-
-
-</script>
+	<script src="levenshtein.js"></script>
+	<script src="rvc.js"></script>
 
 </body>
 </html>
