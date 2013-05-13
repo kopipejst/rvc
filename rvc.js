@@ -1,25 +1,36 @@
-var recognition = new webkitSpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
 
-recognition.onresult = function(event) {
-    final_transcript = '';
-    var interim_transcript = '';
+if (!('webkitSpeechRecognition' in window)) {
 
-    for (var i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-            final_transcript += event.results[i][0].transcript;
-        } else {
-            interim_transcript += event.results[i][0].transcript;
+    $('.not-supported').show();
+    $('.supported').hide();
+
+} else {
+
+
+    var recognition = new webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+
+    recognition.onresult = function(event) {
+        final_transcript = '';
+        var interim_transcript = '';
+
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                final_transcript += event.results[i][0].transcript;
+            } else {
+                interim_transcript += event.results[i][0].transcript;
+            }
         }
-    }
 
-    move(final_transcript);
+        move(final_transcript);
 
-};
+    };
 
-recognition.start();
+    recognition.start();
 
+
+}
 
 var width = $(document).width(),
     height = $(document).height();

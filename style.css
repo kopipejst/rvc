@@ -117,6 +117,13 @@ input[type='range']::-webkit-slider-thumb {
     cursor: pointer;
 }
 
+.not-supported {
+    display: none;
+    color: #CCC;
+    width: 300px;
+    margin: 50px auto;
+
+}
 
 
 
