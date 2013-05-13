@@ -10,21 +10,28 @@
 </head>
 <body>
 
-<div id="canvas"></div>
-
-<div id="box"></div>
-<div id="commands"></div>
-
-<div id="directions">
-  <div id="up">up</div>
-  <div id="left">left</div>
-  <div id="right">right</div>
-  <div id="down">down</div>
+<div class="not-supported">
+  Your browser doesn't support Web Speech API. Please use Google Chrome.
 </div>
 
-<div id="levenshtein">
-  threshold level<br />
-  <input id="level" type="range" min="0" max="5" step= "1" value="0" />
+
+<div class="supported">
+  <div id="canvas"></div>
+
+  <div id="box"></div>
+  <div id="commands"></div>
+
+  <div id="directions">
+    <div id="up">up</div>
+    <div id="left">left</div>
+    <div id="right">right</div>
+    <div id="down">down</div>
+  </div>
+
+  <div id="levenshtein">
+    threshold level<br />
+    <input id="level" type="range" min="0" max="5" step= "1" value="0" />
+  </div>
 </div>
 
 
